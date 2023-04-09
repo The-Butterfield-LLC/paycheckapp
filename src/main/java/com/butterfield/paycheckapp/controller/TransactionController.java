@@ -62,4 +62,14 @@ public class TransactionController {
         response.setViewName("redirect:../../../paycheck/" + id);
         return response;
     }
+
+    @RequestMapping(value="paycheck/{aID}/transaction/getTransaction/{tID}", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView getTransaction(@Valid TransactionFormBean form, @PathVariable("aID") Integer id, @PathVariable("tID") Integer tid) throws Exception {
+        ModelAndView response = new ModelAndView();
+        Transaction transaction = transactionDAO.findById(tid);
+        log.debug(transaction.toString());
+        response.addObject("specificTransaction", transaction);
+        response.setViewName("redirect:../../../../paycheck/" + id);
+        return response;
+    }
 }

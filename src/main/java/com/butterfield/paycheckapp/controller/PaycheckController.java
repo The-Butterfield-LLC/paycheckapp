@@ -65,7 +65,6 @@ public class PaycheckController {
         ModelAndView response = new ModelAndView();
 
         Paycheck paycheck = null;
-        log.debug("Incoming form ID: " );
 
         if (form.getId() == null) {
             paycheck = new Paycheck();
