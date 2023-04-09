@@ -2,37 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{header :: myHead}"></head>
 <body>
-<style>
-  .dayDisplayContainer{
-    display: flex;
-    align-content: baseline;
-    justify-content: space-between;
-    flex-direction: row;
-  }
-  .dayContainer{
-    width: 100px;
-    height: 125px;
-    border: 1px solid black;
-    background-color: bisque;
-    display: flex;
-  }
-
-  .daysOfCheck{
-    display: flex;
-  }
-</style>
 
 <h2>Paycheck Info Page</h2>
 <a href="../paycheck/list">list check</a>
 <div>
   <h3>Paycheck Information</h3>
   <form action="saveCheck" method="post">
-    <input type="text" name="id" id="id" th:value="${paycheck.id}">
+    <input name="id" id="id" th:value="${paycheck.id}" type="hidden">
     <label for="paycheckName">Paycheck Name</label>
     <input type="text" name="paycheckName" id="paycheckName" th:value="${paycheck.paycheckName}">
-
-    <!-- We should have a section for income or expense -->
-
     <label for="paycheckAmount">Paycheck Amount</label>
     <input type="number" name="paycheckAmount" id="paycheckAmount" th:value="${paycheck.paycheckAmount}" step="0.01">
     <label for="paycheckDate">Paycheck Date</label>
@@ -63,7 +41,7 @@ more of a gold-foiling.
 <div id="transactionForm">
   <h3>Transaction Information</h3>
   <form th:action="@{{id}/transaction/submit (id = ${paycheck.id})}" method="post">
-<!--    <input type="text" name="aid"  th:value="${paycheck.id}">-->
+<!--    <input type="text" name="aid"  th:value="${paycheck.id}" hidden="hidden">-->
     <label for="income">Income</label>
     <input type="radio" name="type" id="income" value="income">
     <label for="expense">Expense</label>
@@ -97,7 +75,8 @@ more of a gold-foiling.
     <table>
         <tbody>
             <tr th:each="transaction: ${transactionList}">
-                <td th:text="${transaction.getTransactionId().getType()}"/>
+                <td><a th:href="@{../paycheck/{id}/transaction/getTransaction/{tid} (id = ${paycheck.id}, tid = ${transaction.getTransactionId().getId()})}"><button></button></a></td>
+                <td  th:text="${transaction.getTransactionId().getType()}" />
                 <td th:text="${transaction.getTransactionId().getName()}"/>
                 <td th:text="${transaction.getTransactionId().getAmount()}"/>
                 <td th:text="${transaction.getTransactionId().getDate()}"/>
