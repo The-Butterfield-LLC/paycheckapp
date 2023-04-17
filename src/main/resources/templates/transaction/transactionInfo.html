@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{header :: myHead}"></head>
+<body>
+<h2>Transaction Info Page</h2>
+<div>
+    <form action="../updateTransaction" method="post">
+        <input type="number" name="id" id="id" th:value="${transaction.getId()}">
+        <!--
+            Redundent, but this should work
+            This is to determine what type of transaction it is, the last '' is just incase there is no type.
+        -->
+        <section th:if="${transaction.getType()} == 'expense'">
+            <label for="expense">Expense</label>
+            <input type="radio" name="type" id="expense" value="expense" checked="checked">
+            <label for="income">Income</label>
+            <input type="radio" name="type" id="income" value="income">
+        </section>
+        <section th:if="${transaction.getType()} == 'income'">
+            <label for="expense">Expense</label>
+            <input type="radio" name="type" id="expense" value="expense" >
+            <label for="income">Income</label>
+            <input type="radio" name="type" id="income" value="income" checked="checked">
+        </section>
+        <section th:if="${transaction.getType()} == ''">
+            <label for="expense">Expense</label>
+            <input type="radio" name="type" id="expense" value="expense" >
+            <label for="income">Income</label>
+            <input type="radio" name="type" id="income" value="income">
+        </section>
+        <label for="name">Transaction Name</label>
+        <input type="text" name="name" id="name" th:value="${transaction.getName()}">
+        <label for="amount">Transaction Amount</label>
+        <input type="number" name="amount" id="amount" th:value="${transaction.getAmount()}">
+        <label for="date">Transaction Amount</label>
+        <input type="date" name="date" id="date" th:value="${transaction.getDate()}">
+        <label for="note">Transaction Amount</label>
+        <input type="text" name="note" id="note" th:value="${transaction.getNote()}">
+        <label for="recurring">Recurring+</label>
+        <input type="text" name="recurring" id="recurring" th:value="${transaction.getRecurring()}">
+        <button type="submit">Save</button>
+    </form>
+    <p th:text="${transaction.getDate()}" />
+</div>
+</body>
+</html>
