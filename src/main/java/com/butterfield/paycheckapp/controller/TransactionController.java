@@ -37,10 +37,11 @@ public class TransactionController {
     @Autowired
     private PaycheckTransactionService paycheckTransactionService;
 
+    //This is when they add a transaction from paycheck info page
     @RequestMapping(value="paycheck/{aID}/transaction/submit", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView submitTransaction(@Valid TransactionFormBean form, @PathVariable("aID") Integer id) throws Exception {
         ModelAndView response = new ModelAndView();
-        Transaction transaction = null;
+        Transaction transaction;
 
         if (transactionDAO.findById(form.getId()) == null) {
             //Create new transaction and new paycheck_transaction
@@ -63,13 +64,27 @@ public class TransactionController {
         return response;
     }
 
+    //This is to retrieve the transaction and pull up the transaction info page
     @RequestMapping(value="paycheck/{aID}/transaction/getTransaction/{tID}", method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView getTransaction(@Valid TransactionFormBean form, @PathVariable("aID") Integer id, @PathVariable("tID") Integer tid) throws Exception {
+    public ModelAndView getTransaction(@PathVariable("tID") Integer tid) throws Exception {
         ModelAndView response = new ModelAndView();
         Transaction transaction = transactionDAO.findById(tid);
         log.debug(transaction.toString());
-        response.addObject("specificTransaction", transaction);
-        response.setViewName("redirect:../../../../paycheck/" + id);
+        response.addObject("transaction", transaction);
+        response.setViewName("transaction/transactionInfo");
+        return response;
+    }
+
+    //This is when they save transaction from specific transaction info page
+    @RequestMapping(value="paycheck/{aID}/transaction/updateTransaction", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView updateTransaction(@Valid TransactionFormBean form,@PathVariable("aID") Integer id) throws Exception {
+        ModelAndView response = new ModelAndView();
+        Transaction transaction = transactionDAO.findById(form.getId());
+
+        transaction = transactionService.saveTransaction(form, transaction);
+        transactionDAO.save(transaction);
+
+        response.setViewName("redirect:../../../paycheck/" + id);
         return response;
     }
 }
