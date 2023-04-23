@@ -75,7 +75,7 @@ more of a gold-foiling.
     <table>
         <tbody>
             <tr th:each="transaction: ${transactionList}">
-                <td><a th:href="@{../paycheck/{id}/transaction/getTransaction/{tid} (id = ${paycheck.id}, tid = ${transaction.getTransactionId().getId()})}"><button></button></a></td>
+                <td><a th:href="@{../paycheck/{id}/transaction/getTransaction/{tid} (id = ${paycheck.id}, tid = ${transaction.getTransactionId().getId()})}"><button>Edit</button></a></td>
                 <td  th:text="${transaction.getTransactionId().getType()}" />
                 <td th:text="${transaction.getTransactionId().getName()}"/>
                 <td th:text="${transaction.getTransactionId().getAmount()}"/>

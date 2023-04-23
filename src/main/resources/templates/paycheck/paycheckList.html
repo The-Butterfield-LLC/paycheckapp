@@ -18,7 +18,7 @@
     <tbody>
       <tr th:each="paycheck : ${paycheckList}">
 <!--          <td><a th:href="@{../index/{id} (id = ${paycheck.id})}"><button></button></a> </td>-->
-          <td><a th:href="@{../paycheck/{id} (id = ${paycheck.id})}"><button></button></a> </td>
+          <td><a th:href="@{../paycheck/{id} (id = ${paycheck.id})}"><button>Edit</button></a> </td>
           <td th:text="${paycheck.paycheckName}"/>
           <td th:text="${paycheck.paycheckAmount}"/>
           <td th:text="${paycheck.paycheckDate}"/>
