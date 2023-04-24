@@ -1,0 +1,32 @@
+:root {
+    font-family: 'Roboto', sans-serif;
+    /* Colors are subject to change */
+    background-color: #ececec;
+    --baseColor: #efefef;
+    --secondaryColor: #18ad03;
+    --attentionColor: #da0000;
+    --takeActionColor: #ffc600;
+}
+
+.formLabel{
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+}
+
+.formHeader{
+    width: 100%;
+    height: 1.5em;
+    background-color: var(--secondaryColor);
+    font-weight: bolder;
+    font-size: x-large;
+    text-align: center;
+}
+
+.formInput{
+    width: 60%;
+    height: 2em;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+}

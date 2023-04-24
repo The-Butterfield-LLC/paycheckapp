@@ -2,45 +2,50 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{header :: myHead}">
 </head>
-<body>
-<h2>Hello from the list</h2>
-<div>
-  <table>
-    <thead>
-        <tr>
-            <th>Edit</th>
-            <th>Paycheck Name</th>
-            <th>Paycheck Amount</th>
-            <th>Paycheck Date</th>
-            <th>Days Between Check</th>
-        </tr>
-    </thead>
-    <tbody>
-      <tr th:each="paycheck : ${paycheckList}">
-<!--          <td><a th:href="@{../index/{id} (id = ${paycheck.id})}"><button></button></a> </td>-->
-          <td><a th:href="@{../paycheck/{id} (id = ${paycheck.id})}"><button>Edit</button></a> </td>
-          <td th:text="${paycheck.paycheckName}"/>
-          <td th:text="${paycheck.paycheckAmount}"/>
-          <td th:text="${paycheck.paycheckDate}"/>
-          <td th:text="${paycheck.daysBetweenCheck}"/>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div>
-    <form action="saveCheck" method="post">
-        <label for="paycheckName">Paycheck Name</label>
-        <input type="text" name="paycheckName" id="paycheckName">
-        <label for="paycheckAmount">Paycheck Amount</label>
-        <input type="number" name="paycheckAmount" id="paycheckAmount" step="0.01">
-        <label for="paycheckDate">Paycheck Date</label>
-        <input type="date" name="paycheckDate" id="paycheckDate">
-        <label for="dayName">Name of Day</label>
-        <input type="text" name="dayName" id="dayName">
-        <label for="daysBetweenCheck">Days Between Check</label>
-        <input type="number" name="daysBetweenCheck" id="daysBetweenCheck">
-        <button type="submit">Save</button>
-    </form>
+<body >
+<div th:class="paycheckBody">
+    <div th:class="paycheckList">
+        <div th:class="formHeader">
+            <h2>Lists of Paychecks</h2>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Edit</th>
+                    <th>Paycheck Name</th>
+                    <th>Paycheck Amount</th>
+                    <th>Paycheck Date</th>
+                    <th>Days Between Check</th>
+                </tr>
+            </thead>
+        <tbody>
+            <tr th:each="paycheck : ${paycheckList}">
+    <!--          <td><a th:href="@{../index/{id} (id = ${paycheck.id})}"><button></button></a> </td>-->
+                <td><a th:href="@{../paycheck/{id} (id = ${paycheck.id})}"><button>Edit</button></a> </td>
+                <td th:text="${paycheck.paycheckName}"/>
+                <td th:text="${paycheck.paycheckAmount}"/>
+                <td th:text="${paycheck.paycheckDate}"/>
+                <td th:text="${paycheck.daysBetweenCheck}"/>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+    <div th:class="addPaycheck">
+        <h2 th:class="'formHeader addPaycheckForm'">Add a New Paycheck</h2><br>
+        <form action="saveCheck" method="post" th:class="addPaycheckForm">
+            <label for="paycheckName" th:class="formLabel">Paycheck Name</label><br>
+            <input type="text" name="paycheckName" id="paycheckName" th:class="formInput"><br><br>
+            <label for="paycheckAmount" th:class="formLabel">Paycheck Amount</label><br>
+            <input type="number" name="paycheckAmount" id="paycheckAmount" step="0.01" th:class="formInput"><br><br>
+            <label for="paycheckDate" th:class="formLabel">Paycheck Date</label><br>
+            <input type="date" name="paycheckDate" id="paycheckDate" th:class="formInput"><br><br>
+            <label for="dayName" th:class="formLabel">Name of Day</label><br>
+            <input type="text" name="dayName" id="dayName" th:class="formInput"><br><br>
+            <label for="daysBetweenCheck" th:class="formLabel">Days Between Check</label><br>
+            <input type="number" name="daysBetweenCheck" id="daysBetweenCheck" th:class="formInput"><br><br>
+            <button type="submit">Save</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>
