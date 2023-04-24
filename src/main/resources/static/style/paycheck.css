@@ -1,0 +1,22 @@
+.paycheckBody{
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-template-areas: "paycheckList addPaycheck";
+}
+
+.paycheckList{
+    grid-area: paycheckList;
+    background-color: var(--baseColor);
+}
+
+.addPaycheck{
+    grid-area: addPaycheck;
+    background-color: var(--baseColor);
+}
+
+.addPaycheckForm{
+    display: flex;
+    flex-direction: column;
+    /*justify-items: center;*/
+    align-items: center;
+}
