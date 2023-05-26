@@ -1,11 +1,15 @@
 :root {
     font-family: 'Roboto', sans-serif;
     /* Colors are subject to change */
-    background-color: #ececec;
+    /*background-color: #ececec;*/
     --baseColor: #efefef;
     --secondaryColor: #18ad03;
     --attentionColor: #da0000;
     --takeActionColor: #ffc600;
+}
+
+body{
+    background-color: var(--baseColor);
 }
 
 .formLabel{
