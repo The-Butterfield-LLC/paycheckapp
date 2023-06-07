@@ -80,6 +80,7 @@ more of a gold-foiling.
                 <td th:text="${transaction.getTransactionId().getName()}"/>
                 <td th:text="${transaction.getTransactionId().getAmount()}"/>
                 <td th:text="${transaction.getTransactionId().getDate()}"/>
+                <td><a th:href="@{../paycheck/{id}/transaction/deleteTransaction/{tid} (id = ${paycheck.id}, tid = ${transaction.getTransactionId().getId()})}"><button>Delete</button></a></td>
             </tr>
         </tbody>
     </table>

@@ -9,8 +9,10 @@ import com.butterfield.paycheckapp.database.entity.Transaction;
 import com.butterfield.paycheckapp.formBean.TransactionFormBean;
 import com.butterfield.paycheckapp.service.PaycheckTransactionService;
 import com.butterfield.paycheckapp.service.TransactionService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,6 +87,22 @@ public class TransactionController {
         transactionDAO.save(transaction);
 
         response.setViewName("redirect:../../../paycheck/" + id);
+        return response;
+    }
+
+    @RequestMapping(value = "paycheck/{aID}/transaction/deleteTransaction/{tID}")
+    public ModelAndView deleteTransaction(@Valid TransactionFormBean form, @PathVariable("aID") Integer aID, @PathVariable("tID") Integer id) throws Exception{
+        ModelAndView response = new ModelAndView();
+
+        //Finding all the objects
+        Transaction transaction = transactionDAO.findById(id);
+        Paycheck paycheck = paycheckDAO.findById(aID);
+        PaycheckTransaction paycheckTransaction = paycheckTransactionDAO.findByPaycheckIdAndTransactionId(paycheck, transaction);
+
+        paycheckTransactionDAO.delete(paycheckTransaction);
+        transactionDAO.delete(transaction);
+
+        response.setViewName("redirect:../../../../paycheck/" + aID);
         return response;
     }
 }
